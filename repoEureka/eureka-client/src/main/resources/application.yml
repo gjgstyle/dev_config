@@ -1,0 +1,47 @@
+   server:
+   	port: 8763
+   spring:
+   	application:
+   		name: eureka-client
+
+   eureka:
+   	client:
+   		 #\u662f\u5426\u5c06\u81ea\u5df1\u6ce8\u518c\u5230Eureka Server\uff0c\u9ed8\u8ba4\u4e3atrue
+   		registerWithEureka: true
+   		#\u662f\u5426\u4eceEureka Server\u83b7\u53d6\u6ce8\u518c\u4fe1\u606f\uff0c\u9ed8\u8ba4\u4e3atrue
+   		fetchRegistry: true
+   		service-url:
+   			defaultZone: http://localhost:8762/eureka/
+
+	#jdbc\u93c8\u63a5
+   datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/nts?zeroDateTimeBehavior=CONVERT_TO_NULL&useUnicode=true&characterEncoding=UTF8&useSSL=false&serverTimezone=GMT
+    username: root
+    password: root
+    hikari:
+      auto-commit: false
+      minimum-idle: 10
+      maximum-pool-size: 20
+      connection-timeout: 60000
+      max-lifetime: 300000
+      idle-timeout: 60000
+      validation-timeout: 1000
+      leak-detection-threshold: 30000
+      
+   # \u6587\u4ef6\u4e0a\u4f20\u5927\u5c0f\u914d\u7f6e
+   servlet:
+    	multipart:
+     	 max-file-size: 100MB
+     	 max-request-size: 1000MB
+     	 
+    #mybatis\u914d\u7f6e 	 
+	mybatis:
+ 	 typeAliasesPackage: com.saga.domain
+	  configLocation: classpath:mybatis/mybatis-config.xml
+  	mapper-locations: classpath:mybatis/mapper/*.xml
+  	
+  	#\u65e5\u5fd7\u914d\u7f6e
+	logging:
+  		config: classpath:log4j2.yml
