@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.pratice.eurekaclient.Entity.ResponseBodyEntity;
 import com.pratice.eurekaclient.Entity.UserEntity;
+import com.pratice.eurekaclient.aop.AspLog;
 import com.pratice.eurekaclient.common.utils.EncryPasswordUtil;
 import com.pratice.eurekaclient.service.UserService;
 
@@ -20,6 +21,7 @@ public class UserController {
 	UserService userService;
 
 	@PostMapping("/regist")
+	@AspLog(className="UserController",methodName="reigst")
 	public ResponseBodyEntity<Void> reigst(@RequestBody UserEntity user) {
 		ResponseBodyEntity<Void> result = new  ResponseBodyEntity<Void> ();
 
@@ -46,6 +48,7 @@ public class UserController {
 	}
 
 	@PostMapping("/login")
+	@AspLog(className="UserController",methodName="Login")
 	public ResponseBodyEntity<Void> Login(@RequestParam("userName")String userName,@RequestParam("password")String password) {
 		UserEntity user = userService.getUserInfo(userName);
 

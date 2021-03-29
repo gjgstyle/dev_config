@@ -10,13 +10,13 @@ spring:
   username: root
   password: root
 
-# \u6587\u4ef6\u4e0a\u4f20\u5927\u5c0f\u914d\u7f6e
+# 上传文件上限
 servlet:
   multipart:
   max-file-size: 100MB
   max-request-size: 1000MB
 
-#mybatis\u914d\u7f6e
+#mybatis配置
 mybatis:
   typeAliasesPackage: com.pratice.eurekaclient.Entity
   configLocation: classpath:mybatis/mybatis-config.xml
