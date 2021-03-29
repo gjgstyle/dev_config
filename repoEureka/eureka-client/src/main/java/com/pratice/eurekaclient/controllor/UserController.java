@@ -37,9 +37,12 @@ public class UserController {
 		UserEntity user = userService.getUserInfo(userName);
 
 		ResponseBodyEntity<Void> result = new  ResponseBodyEntity<Void> ();
-		if(user.getPassword().equals(password)) {
+		if(user != null && user.getPassword().equals(password)) {
 			result.setState("200");
 			result.setMessage("登陸成功！");
+		}else {
+			result.setState("201");
+			result.setMessage("請確認賬戶密碼！");
 		}
 
 		return result;
