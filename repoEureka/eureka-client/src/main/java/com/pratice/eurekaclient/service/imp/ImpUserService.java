@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.pratice.eurekaclient.Entity.UserEntity;
+import com.pratice.eurekaclient.common.utils.EncryPasswordUtil;
 import com.pratice.eurekaclient.mapper.UserMapper;
 import com.pratice.eurekaclient.service.UserService;
 
