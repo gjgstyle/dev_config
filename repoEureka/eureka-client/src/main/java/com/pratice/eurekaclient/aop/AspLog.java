@@ -11,7 +11,7 @@ import java.lang.annotation.Target;
  * @author 189681
  *
  */
-@Target({ElementType.TYPE, ElementType.METHOD, ElementType.ANNOTATION_TYPE})
+@Target({ElementType.TYPE, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface AspLog {

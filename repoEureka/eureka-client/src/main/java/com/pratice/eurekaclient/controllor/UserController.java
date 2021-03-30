@@ -1,6 +1,11 @@
 package com.pratice.eurekaclient.controllor;
 
+import java.sql.SQLException;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,8 +27,13 @@ public class UserController {
 
 	@PostMapping("/regist")
 	@AspLog(className="UserController",methodName="reigst")
-	public ResponseBodyEntity<Void> reigst(@RequestBody UserEntity user) {
-		ResponseBodyEntity<Void> result = new  ResponseBodyEntity<Void> ();
+	public ResponseBodyEntity<UserEntity> reigst(@RequestBody @Valid UserEntity user, BindingResult bindingResult) {
+		ResponseBodyEntity<UserEntity> result = new  ResponseBodyEntity<UserEntity> ();
+
+		if(bindingResult.hasErrors()) {
+			result.setResponseInfo("301", bindingResult.getFieldError().getDefaultMessage(), user);
+			return result;
+		}
 
 		UserEntity userEntity = userService.getUserInfo(user.getUserName());
 		//判断当前用户名是否已注册

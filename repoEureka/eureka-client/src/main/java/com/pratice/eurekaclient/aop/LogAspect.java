@@ -1,6 +1,7 @@
 package com.pratice.eurekaclient.aop;
 
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.AfterThrowing;
@@ -35,7 +36,7 @@ public class LogAspect {
 
 		MethodSignature signature = (MethodSignature)joinPoint.getSignature();
 		AspLog aspLog = signature.getMethod().getAnnotation(AspLog.class);
-		log.info("START:",aspLog.className(), aspLog.methodName());
+		log.info("START:"+ aspLog.className() + "." + aspLog.methodName());
 	}
 
 	/**
@@ -45,34 +46,39 @@ public class LogAspect {
 	public void afterInit(JoinPoint joinPoint) {
 		MethodSignature signature = (MethodSignature)joinPoint.getSignature();
 		AspLog aspLog = signature.getMethod().getAnnotation(AspLog.class);
-		log.info("END:",aspLog.className(), aspLog.methodName());
+		log.info("END:"+ aspLog.className() + "." + aspLog.methodName());
 	}
 
 	/**
 	 * 环绕，可以在切入点前后织入代码，并且可以自由的控制何时执行切点
+	 * @throws Throwable
 	 */
 	@Around("pointcut()")
-	public void around(JoinPoint joinPoint) {
+	public Object around(JoinPoint joinPoint) throws Throwable {
+		ProceedingJoinPoint point = (ProceedingJoinPoint)joinPoint;
+
 		MethodSignature signature = (MethodSignature)joinPoint.getSignature();
 		AspLog aspLog = signature.getMethod().getAnnotation(AspLog.class);
-		log.info("AROUND:",aspLog.className(), aspLog.methodName());
+		log.info("AROUND:"+ aspLog.className() + "." +  aspLog.methodName());
+
+		return point.proceed();
 	}
 
 	/**
 	 * 在切点返回内容后，织入相关代码，一般用于对返回值做些加工处理的场景
 	 */
 	/*@AfterReturning("pointcut()")
-	public void afterReturning(JoinPoint joinPoint) throws Exception {
+	public void afterReturning(JoinPoint joinPoint){
 		MethodSignature signature = (MethodSignature)joinPoint.getSignature();
 		AspLog aspLog = signature.getMethod().getAnnotation(AspLog.class);
-		log.info("AfterReturning:",aspLog.className(), aspLog.methodName());
+		log.info("AfterReturning:"+ aspLog.className() + "." + aspLog.methodName());
 	}*/
 
 	/**
 	 * 用来处理当织入的代码抛出异常后的逻辑处理
 	 */
 	/*@AfterThrowing
-	public void afterThrowing() throws Exception{
-		log.warn("AfterReturning:","切点code异常");
+	public void afterThrowing(){
+		log.warn("AfterReturning:切点code异常");
 	}*/
 }

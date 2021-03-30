@@ -1,12 +1,14 @@
 package com.pratice.eurekaclient.Entity;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.enums.IdType;
 
 import lombok.Data;
-import lombok.Getter;
 
 @Data
 @TableName("ath_user")
@@ -21,11 +23,15 @@ public class UserEntity extends EntityBase {
 	 * 用户名、电话（电话注册）
 	 */
 	@TableField(value="user_name",exist = true)
+	@NotBlank(message = "用户名不能为空")
+	@Size(max = 11, min = 6,message = "请输入6~11位用户名")
 	private String userName;
 	/*
 	 * 用户密码
 	 */
 	@TableField(value="user_password",exist = true)
+	@NotBlank(message = "密码不能为空")
+	@Size(max = 16, min = 6,message = "请输入6~16位密码")
 	private String password;
 	/*
 	 * 安全令牌id
