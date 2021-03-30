@@ -1,6 +1,7 @@
 package com.pratice.eurekaclient.Entity;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import com.baomidou.mybatisplus.annotations.TableField;
@@ -24,6 +25,7 @@ public class UserEntity extends EntityBase {
 	 */
 	@TableField(value="user_name",exist = true)
 	@NotBlank(message = "用户名不能为空")
+	@Pattern(regexp = "^[a-zA-Z0-9_]{6,11}$",message="用户名只能包含数字大小写字母")
 	@Size(max = 11, min = 6,message = "请输入6~11位用户名")
 	private String userName;
 	/*
