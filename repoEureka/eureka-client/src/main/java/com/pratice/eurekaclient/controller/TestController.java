@@ -1,4 +1,4 @@
-package com.pratice.eurekaclient.controllor;
+package com.pratice.eurekaclient.controller;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,7 +21,7 @@ import com.pratice.eurekaclient.http.HttpClient;
 @RequestMapping("/test")
 public class TestController {
 
-	Logger logger = LoggerFactory.getLogger(HttpClient.class);
+	Logger logger = LoggerFactory.getLogger(TestController.class);
 
 	final String EDIT_USER_MESSAGE_STATUS = "http://localhost:8763/user/login";
 
@@ -36,7 +36,7 @@ public class TestController {
 		return "my port is "+port;
 	}
 
-	@PostMapping("/http")
+	/*@PostMapping("/http")
 	public JSONObject editStatus(HttpServletRequest request, String userMessageId, @RequestParam(required = false) String tbStatus) {
 	        Map<String, String> header = new HashMap<>();
 	        Map<String, String> params = new HashMap<>();
@@ -49,5 +49,5 @@ public class TestController {
 	        //logger.info("HttpUtils|getUrlReturn|JsonResult= " + jr.getString("statusCode"));
 	        //return jr;
 	        return new JSONObject();
-	  }
+	  }*/
 }

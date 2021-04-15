@@ -32,6 +32,10 @@ mybatis:
   typeAliasesPackage: com.pratice.eurekaclient.Entity
   configLocation: classpath:mybatis/mybatis-config.xml
   mapper-locations: classpath:mybatis/mapper/*.xml
+  
+#swagger2
+swagger:
+ enable: true
 
 #\u65e5\u5fd7\u914d\u7f6e
 #logging:

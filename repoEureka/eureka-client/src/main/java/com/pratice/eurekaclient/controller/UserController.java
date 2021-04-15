@@ -1,4 +1,4 @@
-package com.pratice.eurekaclient.controllor;
+package com.pratice.eurekaclient.controller;
 
 import java.sql.SQLException;
 
@@ -18,14 +18,20 @@ import com.pratice.eurekaclient.aop.AspLog;
 import com.pratice.eurekaclient.common.utils.EncryPasswordUtil;
 import com.pratice.eurekaclient.service.UserService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+
 @RestController
 @RequestMapping("user")
+@Api("用户管理接口")
 public class UserController {
 
 	@Autowired
 	UserService userService;
 
 	@PostMapping("/regist")
+	@ApiOperation(value="用户注测")
 	@AspLog(className="UserController",methodName="reigst")
 	public ResponseBodyEntity<UserEntity> reigst(@RequestBody @Valid UserEntity user, BindingResult bindingResult) {
 		ResponseBodyEntity<UserEntity> result = new  ResponseBodyEntity<UserEntity> ();
@@ -58,8 +64,11 @@ public class UserController {
 	}
 
 	@PostMapping("/login")
+	@ApiOperation(value="用户登录")
 	@AspLog(className="UserController",methodName="Login")
-	public ResponseBodyEntity<Void> Login(@RequestParam("userName")String userName,@RequestParam("password")String password) {
+	public ResponseBodyEntity<Void> Login(
+			@ApiParam(name="userName",value="用户名", required=true) @RequestParam("userName")String userName,
+			@ApiParam(name="password",value="密码", required=true) @RequestParam("password")String password) {
 		UserEntity user = userService.getUserInfo(userName);
 
 		ResponseBodyEntity<Void> result = new  ResponseBodyEntity<Void> ();
